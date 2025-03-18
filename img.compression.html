@@ -1,12 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fully responsive image compression tool that allows users to select the compression level and optimize images accordingly.">
-    <meta name="keywords" content="image compression, compress images, image optimizer, online image compressor">
+    <meta name="description" content="Free online tools for image and PDF processing. Compress, convert, and optimize your files effortlessly. Tools include image compression, PDF to Word, image to PDF, and more.">
+    <meta name="keywords" content="image tools, PDF tools, compress images, convert PDF, online tools, image to PDF, PDF to Word, image resizer, PDF merger, image converter, free online tools">
     <meta name="author" content="Your Name">
-    <title>Image Compression Tool</title>
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="language" content="English">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+
+    <!-- Open Graph Meta Tags (for social media) -->
+    <meta property="og:title" content="Image & PDF Tools - Free Online Tools">
+    <meta property="og:description" content="Free online tools for image and PDF processing. Compress, convert, and optimize your files effortlessly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yourwebsite.com">
+    <meta property="og:image" content="https://www.yourwebsite.com/images/logo.png">
+    <meta property="og:site_name" content="Image & PDF Tools">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Image & PDF Tools - Free Online Tools">
+    <meta name="twitter:description" content="Free online tools for image and PDF processing. Compress, convert, and optimize your files effortlessly.">
+    <meta name="twitter:image" content="https://www.yourwebsite.com/images/logo.png">
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://www.yourwebsite.com">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://www.yourwebsite.com/favicon.ico" type="image/x-icon">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Image & PDF Tools",
+        "url": "https://www.yourwebsite.com",
+        "description": "Free online tools for image and PDF processing. Compress, convert, and optimize your files effortlessly.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.yourwebsite.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <title>Image & PDF Tools - Free Online Tools</title>
     <style>
         /* General Styles */
         body {
@@ -27,13 +70,68 @@
 
         h1 {
             margin: 0;
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
 
         main {
             padding: 20px;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
+        }
+
+        /* Tool Cards */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tool-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tool-card img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .tool-card h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #4CAF50;
+        }
+
+        .tool-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .tool-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .tool-card a:hover {
+            background-color: #45a049;
         }
 
         /* Ad Sections */
@@ -52,22 +150,19 @@
             color: #666;
         }
 
-        /* Compression Tool Section */
-        #compression-tool {
+        /* Tool Sections */
+        .tool-section {
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-top: 20px;
         }
 
-        #compression-tool h2 {
+        .tool-section h2 {
             margin-top: 0;
             color: #4CAF50;
-        }
-
-        #image-input {
-            display: none;
         }
 
         .upload-label {
@@ -84,6 +179,10 @@
             background-color: #45a049;
         }
 
+        #image-input, #image-input-pdf {
+            display: none;
+        }
+
         #compression-level {
             width: 100%;
             padding: 10px;
@@ -93,7 +192,7 @@
             font-size: 1rem;
         }
 
-        #compress-btn {
+        #compress-btn, #convert-btn {
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -104,23 +203,23 @@
             transition: background-color 0.3s ease;
         }
 
-        #compress-btn:hover {
+        #compress-btn:hover, #convert-btn:hover {
             background-color: #45a049;
         }
 
-        #image-container {
+        #image-container, #pdf-container {
             margin-top: 20px;
             display: none;
         }
 
-        #compressed-image {
+        #compressed-image, #pdf-preview {
             max-width: 100%;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        #download-link {
+        #download-link, #download-pdf-link {
             display: inline-block;
             margin-top: 15px;
             padding: 10px 20px;
@@ -131,7 +230,7 @@
             transition: background-color 0.3s ease;
         }
 
-        #download-link:hover {
+        #download-link:hover, #download-pdf-link:hover {
             background-color: #45a049;
         }
 
@@ -151,32 +250,35 @@
         /* Responsive Design */
         @media (max-width: 600px) {
             h1 {
-                font-size: 1.5rem;
+                font-size: 2rem;
             }
 
-            #compression-tool {
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-card {
                 padding: 15px;
             }
 
-            .upload-label, #compress-btn, #download-link {
-                width: 100%;
-                padding: 15px;
-                font-size: 0.9rem;
+            .tool-card h3 {
+                font-size: 1.3rem;
             }
 
-            #compression-level {
-                font-size: 0.9rem;
+            .tool-card p {
+                font-size: 0.8rem;
             }
 
-            .ad-section {
-                margin: 10px 0;
+            .tool-card a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Image Compression Tool</h1>
+        <h1>Image & PDF Tools</h1>
     </header>
 
     <main>
@@ -196,9 +298,52 @@
             </script>
         </div>
 
-        <!-- Compression Tool -->
-        <section id="compression-tool">
-            <h2>Compress Your Images</h2>
+        <!-- Tool Grid -->
+        <div class="tool-grid">
+            <!-- Image Compression Tool -->
+            <div class="tool-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3022/3022384.png" alt="Image Compression">
+                <h3>Image Compression</h3>
+                <p>Compress images to reduce file size without losing quality.</p>
+                <a href="#compression-tool">Use Tool</a>
+            </div>
+
+            <!-- Image to PDF Converter -->
+            <div class="tool-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Image to PDF">
+                <h3>Image to PDF</h3>
+                <p>Convert images to PDF files effortlessly.</p>
+                <a href="#image-to-pdf-tool">Use Tool</a>
+            </div>
+
+            <!-- PDF to Word Converter -->
+            <div class="tool-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF to Word">
+                <h3>PDF to Word</h3>
+                <p>Convert PDF files to editable Word documents.</p>
+                <a href="pdf-to-word.html">Use Tool</a>
+            </div>
+
+            <!-- Image Resizer -->
+            <div class="tool-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3142/3142036.png" alt="Image Resizer">
+                <h3>Image Resizer</h3>
+                <p>Resize images to specific dimensions effortlessly.</p>
+                <a href="image-resizer.html">Use Tool</a>
+            </div>
+
+            <!-- PDF Merger -->
+            <div class="tool-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/337/337958.png" alt="PDF Merger">
+                <h3>PDF Merger</h3>
+                <p>Merge multiple PDF files into a single document.</p>
+                <a href="pdf-merger.html">Use Tool</a>
+            </div>
+        </div>
+
+        <!-- Image Compression Tool Section -->
+        <section id="compression-tool" class="tool-section">
+            <h2>Image Compression Tool</h2>
             <label for="image-input" class="upload-label">Upload Image</label>
             <input type="file" id="image-input" accept="image/*">
             <select id="compression-level">
@@ -213,7 +358,19 @@
             <a id="download-link" href="#" download="compressed-image.jpg">Download Compressed Image</a>
         </section>
 
-        <!-- Ad Section (Middle) -->
+        <!-- Image to PDF Converter Section -->
+        <section id="image-to-pdf-tool" class="tool-section">
+            <h2>Image to PDF Converter</h2>
+            <label for="image-input-pdf" class="upload-label">Upload Image</label>
+            <input type="file" id="image-input-pdf" accept="image/*">
+            <button id="convert-btn">Convert to PDF</button>
+            <div id="pdf-container">
+                <iframe id="pdf-preview" src="" style="width: 100%; height: 500px; border: none;"></iframe>
+            </div>
+            <a id="download-pdf-link" href="#" download="converted.pdf">Download PDF</a>
+        </section>
+
+        <!-- Ad Section (Bottom) -->
         <div class="ad-section">
             <h3>Advertisement</h3>
             <!-- Adsterra Ad Code -->
@@ -228,29 +385,14 @@
                 document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.profitabledisplaynetwork.com/YOUR_ADSTERRA_AD_UNIT_ID/invoke.js"></scr' + 'ipt>');
             </script>
         </div>
-
-        <!-- Ad Section (Bottom) -->
-        <div class="ad-section">
-            <h3>Advertisement</h3>
-            <!-- Adsterra Ad Code -->
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'YOUR_ADSTERRA_AD_UNIT_ID',
-                    'format' : 'iframe',
-                    'height' : 60,
-                    'width' : 468,
-                    'params' : {}
-                };
-                document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.profitabledisplaynetwork.com/YOUR_ADSTERRA_AD_UNIT_ID/invoke.js"></scr' + 'ipt>');
-            </script>
-        </div>
     </main>
 
     <footer>
-        <p>&copy; 2023 Image Compression Tool. All rights reserved.</p>
+        <p>&copy; 2023 Image & PDF Tools. All rights reserved.</p>
     </footer>
 
     <script>
+        // Image Compression Tool Functionality
         document.getElementById('compress-btn').addEventListener('click', function() {
             const fileInput = document.getElementById('image-input');
             const compressionLevel = parseFloat(document.getElementById('compression-level').value);
@@ -293,6 +435,51 @@
 
             reader.readAsDataURL(file);
         });
+
+        // Image to PDF Converter Functionality
+        document.getElementById('convert-btn').addEventListener('click', function() {
+            const fileInput = document.getElementById('image-input-pdf');
+            const pdfContainer = document.getElementById('pdf-container');
+            const pdfPreview = document.getElementById('pdf-preview');
+            const downloadPdfLink = document.getElementById('download-pdf-link');
+
+            if (fileInput.files.length === 0) {
+                alert('Please select an image to convert.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = new Image();
+                img.src = e.target.result;
+
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    const width = img.width;
+                    const height = img.height;
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Convert canvas to PDF
+                    const pdf = new jsPDF();
+                    pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 10, 10, 190, 0);
+                    const pdfUrl = pdf.output('bloburl');
+                    pdfPreview.src = pdfUrl;
+                    downloadPdfLink.href = pdfUrl;
+                    pdfContainer.style.display = 'block';
+                };
+            };
+
+            reader.readAsDataURL(file);
+        });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
